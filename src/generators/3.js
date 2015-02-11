@@ -1,0 +1,33 @@
+'use strict';
+
+const fs = require('fs');
+const express = require('express');
+const process1 = require('../../lib/process');
+const process2 = require('../../lib/process');
+const process3 = require('../../lib/process');
+const run = require('../../lib/run-simple');
+const thunkify = require('../../lib/thunkify');
+
+let app = express();
+
+app.get('/process-file', function(req, res) {  
+  run(function *() {
+    let inputFile = '../../data/input.txt';
+    let outputFile = '../../data/output.txt';
+
+    try {
+      let inputData = yield thunkify(fs.readFile.bind(fs))(inputFile);
+      let processedData1 = yield thunkify(process1)(inputData);
+      let processedData2 = yield thunkify(process2)(processedData1);
+      let processedData3 = yield thunkify(process3)(processedData2);
+      
+      yield thunkify(fs.appendFile.bind(fs))(outputFile, processedData3);
+      res.status(200).send('processed successfully using ES6 generators and thunks');
+
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  });
+});
+
+app.listen(3000);

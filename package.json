@@ -1,0 +1,24 @@
+{
+  "name": "taming-async-talk",
+  "version": "1.0.0",
+  "description": "Examples for taming asynchronous code",
+  "main": "index.js",
+  "dependencies": {
+    "async": "^0.9.0",
+    "bluebird": "^2.9.7",
+    "co": "^4.3.1",
+    "express": "^4.11.2",
+    "fibrous": "^0.3.3",
+    "highland": "^2.3.0",
+    "mz": "^1.2.1"
+  },
+  "engines": {
+    "iojs": "1.0.x"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Eirik Vullum <evullum@gmail.com> (http://www.vullum.io/)",
+  "license": "ISC"
+}
