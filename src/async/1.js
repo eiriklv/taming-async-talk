@@ -9,9 +9,8 @@ const process3 = require('../../lib/process');
 
 let app = express();
 
-app.get('/process-file', function(req, res) {
+app.get('/', function(req, res) {
   let inputFile = '../../data/input.txt';
-  let outputFile = '../../data/output.txt';
 
   async.waterfall([
     function(callback) {
@@ -25,23 +24,18 @@ app.get('/process-file', function(req, res) {
       });
     },
     function(data, callback) {
-      process1(data, function(err, data) {
+      process2(data, function(err, data) {
         callback(err, data);
       });
     },
     function(data, callback) {
-      process1(data, function(err, data) {
-        callback(err, data);
-      });
-    },
-    function(data, callback) {
-      fs.appendFile(outputFile, data, function(err) {
+      process3(data, function(err, data) {
         callback(err, data);
       });
     }
   ], function(err, result) {
     if (err) return res.status(500).send(err);
-    res.status(200).send('processed successfully using async lib');
+    res.status(200).send(result);
   });
 });
 

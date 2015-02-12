@@ -8,9 +8,8 @@ const process3 = require('../../lib/process');
 
 let app = express();
 
-app.get('/process-file', function(req, res) {
+app.get('/', function(req, res) {
   let inputFile = '../../data/input.txt';
-  let outputFile = '../../data/output.txt';
 
   fs.readFile(inputFile, function(err, data) {
     if (err) return res.status(500).send(err);
@@ -23,12 +22,8 @@ app.get('/process-file', function(req, res) {
 
         process3(data, function(err, data) {
           if (err) return res.status(500).send(err);
-
-          fs.appendFile(outputFile, data, function(err) {
-            if (err) return res.status(500).send(err);
-
-            res.status(200).send('processed successfully using continuation passing style');
-          });
+          
+          res.status(200).send(data);
         });
       });
     });

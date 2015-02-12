@@ -9,9 +9,8 @@ const process3 = require('../../lib/process');
 
 let app = express();
 
-app.get('/process-file', function(req, res) {
+app.get('/', function(req, res) {
   let inputFile = '../../data/input.txt';
-  let outputFile = '../../data/output.txt';
 
   let data = hl([inputFile]);
 
@@ -20,12 +19,11 @@ app.get('/process-file', function(req, res) {
     .map(hl.wrapCallback(process1)).series()
     .map(hl.wrapCallback(process2)).series()
     .map(hl.wrapCallback(process3)).series()
-    .map(hl.wrapCallback(fs.appendFile.bind(fs, outputFile))).series()
     .stopOnError(function(err) {
       res.status(500).send(err);
     })
-    .apply(function(data) {
-      res.status(200).send('processed successfully using highland streams');
+    .apply(function(result) {
+      res.status(200).send(result);
     });
 });
 

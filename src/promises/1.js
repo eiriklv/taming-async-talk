@@ -9,17 +9,15 @@ const process3 = require('../../lib/process');
 
 let app = express();
 
-app.get('/process-file', function(req, res) {
+app.get('/', function(req, res) {
   let inputFile = '../../data/input.txt';
-  let outputFile = '../../data/output.txt';
 
   fs.readFileAsync(inputFile)
     .then(Promise.promisify(process1))
     .then(Promise.promisify(process2))
     .then(Promise.promisify(process3))
-    .then(fs.appendFileAsync.bind(fs, outputFile))
-    .then(function(data) {
-      res.status(200).send('processed successfully using bluebird promises');
+    .then(function(result) {
+      res.status(200).send(result);
     })
     .catch(function(err) {
       res.status(500).send(err);
