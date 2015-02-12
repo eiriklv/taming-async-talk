@@ -13,7 +13,6 @@ let app = express();
 app.get('/', function(req, res) {  
   run(function *() {
     let inputFile = '../../data/input.txt';
-    let outputFile = '../../data/output.txt';
 
     try {
       let inputData = yield ncurry(2, fs.readFile.bind(fs))(inputFile);
