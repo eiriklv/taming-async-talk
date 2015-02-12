@@ -4,7 +4,6 @@ const fs = require('mz/fs');
 const express = require('express');
 const promisify = require('../../lib/promisify');
 const co = require('co');
-
 const process1 = promisify(require('../../lib/process'));
 const process2 = promisify(require('../../lib/process'));
 const process3 = promisify(require('../../lib/process'));

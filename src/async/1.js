@@ -14,23 +14,23 @@ app.get('/', function(req, res) {
 
   async.waterfall([
     function(callback) {
-      fs.readFile(inputFile, function(err, data) {
-        callback(err, data);
+      fs.readFile(inputFile, function(err, inputData) {
+        callback(err, inputData);
       });
     },
-    function(data, callback) {
-      process1(data, function(err, data) {
-        callback(err, data);
+    function(inputData, callback) {
+      process1(inputData, function(err, processedData1) {
+        callback(err, processedData1);
       });
     },
-    function(data, callback) {
-      process2(data, function(err, data) {
-        callback(err, data);
+    function(processedData1, callback) {
+      process2(processedData1, function(err, processedData2) {
+        callback(err, processedData2);
       });
     },
-    function(data, callback) {
-      process3(data, function(err, data) {
-        callback(err, data);
+    function(processedData2, callback) {
+      process3(processedData2, function(err, processedData3) {
+        callback(err, processedData3);
       });
     }
   ], function(err, result) {

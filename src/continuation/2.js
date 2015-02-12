@@ -13,24 +13,24 @@ app.get('/', function(req, res) {
 
   fs.readFile(inputFile, onReadFile);
 
-  function onReadFile(err, data) {
+  function onReadFile(err, inputData) {
     if (err) return res.status(500).send(err);
-    process1(data, onProcess1);
+    process1(inputData, onProcess1);
   }
 
-  function onProcess1(err, data) {
+  function onProcess1(err, processedData1) {
     if (err) return res.status(500).send(err);
-    process2(data, onProcess2);
+    process2(processedData1, onProcess2);
   }
 
-  function onProcess2(err, data) {
+  function onProcess2(err, processedData2) {
     if (err) return res.status(500).send(err);
-    process3(data, onDone);
+    process3(processedData2, onDone);
   }
 
-  function onDone(err, data) {
+  function onDone(err, result) {
     if (err) return res.status(500).send(err);
-    res.status(200).send(data);
+    res.status(200).send(result);
   }
 });
 
